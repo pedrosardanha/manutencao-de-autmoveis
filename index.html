@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agendamento de Serviço</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+
+        .container {
+            background-color: #f5f5dc;
+            padding: 20px;
+            width: 700px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 20px;
+            margin-top: 5px;
+        }
+
+
+        .checkbox-group label {
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            gap: 5px;
+        }
+
+
+        .button-group {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            width: 48%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+
+        .btn-agendar {
+            background-color: blue;
+        }
+
+
+        .btn-agendar:hover {
+            background-color: darkblue;
+        }
+
+
+        .btn-cancelar {
+            background-color: blue;
+        }
+
+
+        .btn-cancelar:hover {
+            background-color: darkblue;
+        }
+    </style>
+
+
+    <script>
+        function confirmarAgendamento(event) {
+            event.preventDefault();
+            const checkboxes = document.querySelectorAll('.checkbox-group input[type=checkbox]');
+            const radios = document.querySelectorAll('.radio-group input[type=radio]');
+            const textarea = document.querySelector('textarea');
+
+            const algumCheckboxMarcado = Array.from(checkboxes).some(cb => cb.checked);
+            const algumRadioMarcado = Array.from(radios).some(r => r.checked);
+
+            alert("Você pressionou: Agendar serviço");
+        }
+
+
+        function cancelarServico(event) {
+            event.preventDefault();
+            alert("Você pressionou: Cancelar serviço");
+            event.target.reset();
+        }
+
+
+        window.onload = function () {
+            const form = document.querySelector("form");
+            form.addEventListener("reset", cancelarServico);
+        };
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <form onsubmit="confirmarAgendamento(event)">
+            <label>Nome do Cliente:</label>
+            <input type="text" placeholder="Digite seu nome..." required>
+
+            <label>Senha do Cliente:</label>
+            <input type="password" placeholder="Digite sua senha..." required>
+
+            <label>Serviços Desejados:</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="servico">Troca de Óleo</label>
+                <label><input type="checkbox" name="servico">Alinhamento</label>
+                <label><input type="checkbox" name="servico">Balanceamento</label>
+                <label><input type="checkbox" name="servico">Revisão Geral</label>
+            </div>
+
+            <label>Tipo de Veículo:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="veiculo">Carro</label>
+                <label><input type="radio" name="veiculo">Moto</label>
+            </div>
+
+            <label>Modelo do Veículo:</label>
+            <select required>
+                <option value="">Selecione um modelo</option>
+                <option>Modelo 1</option>
+                <option selected>Modelo 2</option>
+                <option>Modelo 3</option>
+            </select>
+
+            <label>Observações:</label>
+            <textarea rows="3" placeholder="Digite observações sobre o veículo..." required></textarea>
+
+            <div class="button-group">
+                <button class="btn-agendar" type="submit">Agendar Serviço</button>
+                <button class="btn-cancelar" type="reset">Cancelar Serviço</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
